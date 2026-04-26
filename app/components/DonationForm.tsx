@@ -26,11 +26,36 @@ export function DonationForm() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
-  function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
+  async function compressImage(file: File): Promise<File> {
+    const MAX_PX = 1200;
+    const QUALITY = 0.8;
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        const scale = Math.min(1, MAX_PX / Math.max(img.width, img.height));
+        const canvas = document.createElement('canvas');
+        canvas.width = Math.round(img.width * scale);
+        canvas.height = Math.round(img.height * scale);
+        canvas.getContext('2d')!.drawImage(img, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          (blob) => resolve(blob ? new File([blob], 'photo.jpg', { type: 'image/jpeg' }) : file),
+          'image/jpeg',
+          QUALITY
+        );
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+      img.src = url;
+    });
+  }
+
+  async function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setPhotoFile(file);
-    setPhotoPreview(URL.createObjectURL(file));
+    const compressed = await compressImage(file);
+    setPhotoFile(compressed);
+    setPhotoPreview(URL.createObjectURL(compressed));
   }
 
   function removePhoto() {
@@ -132,17 +157,16 @@ export function DonationForm() {
         </label>
 
         {!photoPreview ? (
-          <button
-            type="button"
-            onClick={() => fileInputRef.current?.click()}
+          <label
+            htmlFor="photo-input"
             className="w-full py-7 rounded-xl border-2 border-dashed border-warm-border hover:border-crimson/40 hover:bg-crimson-light/40 transition-colors duration-200 flex flex-col items-center gap-2 text-warm-muted cursor-pointer"
           >
             <svg className="w-7 h-7 opacity-40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
             </svg>
-            <span className="text-sm">Click to upload a photo</span>
+            <span className="text-sm">Tap to upload a photo</span>
             <span className="text-xs opacity-60">JPG, PNG, WebP · max 10 MB</span>
-          </button>
+          </label>
         ) : (
           <div className="relative rounded-xl overflow-hidden border border-warm-border">
             <div className="relative w-full h-44">
@@ -163,6 +187,7 @@ export function DonationForm() {
 
         <input
           ref={fileInputRef}
+          id="photo-input"
           type="file"
           name="photo"
           accept="image/*"
