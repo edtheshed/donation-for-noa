@@ -1,10 +1,11 @@
 # Blood Donation Registry
 
 Next.js 16 (App Router, TypeScript, Tailwind v4) + Supabase (Postgres + Storage).
+Live at **donations-for-noa.org**, deployed on Vercel (auto-deploys on push to `main`).
 
 ## Stack
-- **Framework:** Next.js App Router, `force-dynamic` on the homepage (data changes frequently)
-- **Database:** Supabase Postgres
+- **Framework:** Next.js 16, App Router, React 19, `force-dynamic` on the homepage
+- **Database:** Supabase Postgres (free tier — 500 MB storage limit, be mindful)
 - **Storage:** Supabase Storage bucket `donation-photos` (public)
 - **Fonts:** Cormorant Garamond (display) + Lora (body) via `next/font/google`
 - **Styling:** Tailwind v4 with custom tokens in `app/globals.css` — crimson/cream palette
@@ -15,8 +16,9 @@ Next.js 16 (App Router, TypeScript, Tailwind v4) + Supabase (Postgres + Storage)
 | `app/page.tsx` | Homepage — fetches donations, renders feed + form |
 | `app/actions.ts` | Server actions: `getDonations()` and `submitDonation(formData)` |
 | `app/components/DonationCard.tsx` | Server component card |
-| `app/components/DonationForm.tsx` | `"use client"` form with live photo preview |
-| `lib/supabase.ts` | Lazy Supabase client via `getSupabase()` (safe at build time) |
+| `app/components/DonationForm.tsx` | `"use client"` form with live photo preview + client-side compression |
+| `app/globals.css` | Tailwind v4 theme tokens (colours, fonts, animations) |
+| `lib/supabase.ts` | Lazy Supabase client via `getSupabase()` — throws if env vars missing |
 | `types/donation.ts` | `Donation` interface |
 | `supabase/schema.sql` | Full DB + storage setup — run once in Supabase SQL editor |
 
@@ -33,14 +35,34 @@ donations (
 )
 ```
 
-## Setup
-1. Copy `.env.local.example` → `.env.local` and fill in:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-2. Run `supabase/schema.sql` in the Supabase SQL editor
-3. `npm run dev`
+## Local dev
+1. Copy `.env.local.example` → `.env.local` and fill in `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+2. `npm run dev`
+
+`supabase/schema.sql` is for reference — the DB is already provisioned.
+
+## Photo uploads
+Photos are compressed **client-side** before upload (in `DonationForm.tsx`):
+- Max 1200px on longest side, re-encoded as JPEG at 80% quality
+- Typical mobile photo: ~5 MB → ~150 KB
+- This is intentional to stay within Supabase's 500 MB free tier
+- Do not remove or bypass this compression
+
+The server action (`submitDonation`) receives the compressed file, converts to `ArrayBuffer`, and uploads to the `donation-photos` Supabase Storage bucket, storing the public URL in `photo_url`.
+
+## Design tokens (Tailwind v4)
+```
+cream         #FDF6EE   page background
+crimson       #C0392B   primary accent
+crimson-dark  #96211A   hover states
+crimson-mid   #E74C3C   blockquote border
+crimson-light #FEF2F2   error backgrounds
+warm-ink      #1A0505   body text
+warm-muted    #7C4040   secondary text
+warm-border   #E8CFCF   card borders
+```
 
 ## Notes
-- All page text is intentionally generic — ready for customisation
-- Photo uploads: server action converts `File` → `ArrayBuffer`, uploads to `donation-photos` bucket, stores public URL in `photo_url`
 - After a successful form submission, `revalidatePath('/')` refreshes the feed
+- The photo upload button uses a `<label htmlFor="photo-input">` to trigger the file input — this is intentional for mobile browser compatibility (programmatic `.click()` on hidden inputs is unreliable on Android)
+- All page text is intentionally generic — ready for customisation
