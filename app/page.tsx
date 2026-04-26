@@ -57,9 +57,6 @@ export default async function Home() {
             lineHeight: 1.05,
           }}
         >
-          Every drop
-          <br />
-          <em>counts.</em>
         </h1>
         <p
           className="text-warm-muted leading-relaxed"
