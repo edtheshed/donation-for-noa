@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import { submitDonation } from '@/app/actions';
 
@@ -18,7 +18,10 @@ const inputClass =
 const labelClass = 'block text-sm font-medium text-warm-ink mb-1.5';
 
 export function DonationForm() {
-  const today = new Date().toISOString().split('T')[0];
+  const [today, setToday] = useState('');
+  useEffect(() => {
+    setToday(new Date().toISOString().split('T')[0]);
+  }, []);
   const [photoPreview, setPhotoPreview] = useState<string | null>(null);
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [submitting, setSubmitting] = useState(false);
