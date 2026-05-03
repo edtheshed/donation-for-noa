@@ -14,6 +14,10 @@
   --font-body:    var(--font-lora);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #FDF6EE;
   color: #1A0505;

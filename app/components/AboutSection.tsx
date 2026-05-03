@@ -12,7 +12,7 @@ export async function AboutSection() {
   const htmlContent = processed.toString();
 
   return (
-    <section className="max-w-3xl mx-auto px-6 py-14">
+    <section id="about" className="max-w-3xl mx-auto px-6 py-14">
       <div
         className="[&_p]:text-warm-muted [&_p]:leading-relaxed [&_p]:mb-5 [&_em]:italic"
         style={{ fontFamily: 'var(--font-lora)', fontSize: '1rem' }}

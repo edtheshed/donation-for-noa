@@ -5,6 +5,7 @@ import { DonationCard } from '@/app/components/DonationCard';
 import { DonationForm } from '@/app/components/DonationForm';
 import { StatsSection } from '@/app/components/StatsSection';
 import { AboutSection } from '@/app/components/AboutSection';
+import { FAQSection } from '@/app/components/FAQSection';
 
 function Divider() {
   return <div className="h-px bg-warm-border my-2" />;
@@ -18,14 +19,25 @@ export default async function Home() {
       {/* Crimson accent bar */}
       <div className="h-1 bg-crimson w-full" />
 
-      {/* Header */}
-      <header className="max-w-5xl mx-auto px-6 py-7">
-        <span
-          className="text-warm-ink tracking-widest text-xs uppercase font-medium"
-          style={{ fontFamily: 'var(--font-cormorant)', fontSize: '0.9rem', letterSpacing: '0.16em' }}
-        >
-          Donations for Noa
-        </span>
+      {/* Sticky header */}
+      <header className="sticky top-0 z-10 bg-cream/90 backdrop-blur-sm border-b border-warm-border">
+        <nav className="overflow-x-auto whitespace-nowrap px-6 py-4 flex justify-center gap-6">
+          {[
+            { href: '#about', label: 'About' },
+            { href: '#donate', label: 'Donate' },
+            { href: '#donations', label: 'Donations' },
+            { href: '#faq', label: 'FAQ' },
+          ].map(({ href, label }) => (
+            <a
+              key={href}
+              href={href}
+              className="text-warm-muted hover:text-crimson transition-colors duration-150"
+              style={{ fontFamily: 'var(--font-lora)', fontSize: '0.75rem' }}
+            >
+              {label}
+            </a>
+          ))}
+        </nav>
       </header>
 
       <div className="max-w-5xl mx-auto px-6">
@@ -40,7 +52,7 @@ export default async function Home() {
         <Divider />
 
         {/* (iii) Donation form */}
-        <section className="max-w-md mx-auto py-14">
+        <section id="donate" className="max-w-md mx-auto py-14">
           <h2
             className="text-warm-ink text-center mb-8"
             style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
@@ -55,7 +67,7 @@ export default async function Home() {
         <Divider />
 
         {/* (iv) Full donation list */}
-        <section className="py-14">
+        <section id="donations" className="py-14">
           <h2
             className="text-warm-ink text-center mb-10"
             style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
@@ -77,6 +89,11 @@ export default async function Home() {
             </div>
           )}
         </section>
+
+        <Divider />
+
+        {/* (v) FAQ */}
+        <FAQSection />
       </div>
 
       {/* Footer */}
