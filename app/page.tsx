@@ -42,17 +42,11 @@ export default async function Home() {
         {/* (iii) Donation form */}
         <section className="max-w-md mx-auto py-14">
           <h2
-            className="text-warm-ink text-center mb-2"
+            className="text-warm-ink text-center mb-8"
             style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
           >
             Record your donation
           </h2>
-          <p
-            className="text-center text-warm-muted text-sm mb-8"
-            style={{ fontFamily: 'var(--font-lora)' }}
-          >
-            Donated blood? Add your name to the list.
-          </p>
           <div className="bg-white rounded-2xl shadow-sm border border-warm-border p-7">
             <DonationForm />
           </div>
@@ -63,17 +57,11 @@ export default async function Home() {
         {/* (iv) Full donation list */}
         <section className="py-14">
           <h2
-            className="text-warm-ink text-center mb-2"
+            className="text-warm-ink text-center mb-10"
             style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
           >
-            Those who have given
+            Donations so far
           </h2>
-          <p
-            className="text-center text-warm-muted text-sm mb-10"
-            style={{ fontFamily: 'var(--font-lora)' }}
-          >
-            Each record below represents a real act of generosity.
-          </p>
 
           {donations.length === 0 ? (
             <div className="text-center py-16 text-warm-muted">
