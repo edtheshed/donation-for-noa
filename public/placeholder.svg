@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="600" viewBox="0 0 1200 600">
+  <rect width="1200" height="600" fill="#FDF6EE"/>
+  <rect x="0" y="0" width="1200" height="4" fill="#C0392B" opacity="0.3"/>
+  <rect x="0" y="596" width="1200" height="4" fill="#C0392B" opacity="0.3"/>
+  <!-- Repeating blood drop pattern -->
+  <g opacity="0.08" fill="#C0392B">
+    <path transform="translate(160,180) scale(4)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(360,120) scale(3)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(580,200) scale(5)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(820,140) scale(3.5)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(1020,190) scale(4.5)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(260,340) scale(3.5)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(480,380) scale(4)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(720,320) scale(3)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+    <path transform="translate(940,360) scale(4.5)" d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z"/>
+  </g>
+  <text x="600" y="318" text-anchor="middle" fill="#C0392B" opacity="0.25" font-family="Georgia, serif" font-size="22" letter-spacing="6">IMAGE PLACEHOLDER</text>
+</svg>

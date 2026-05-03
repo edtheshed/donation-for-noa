@@ -3,6 +3,8 @@ export const dynamic = 'force-dynamic';
 import { getDonations } from '@/app/actions';
 import { DonationCard } from '@/app/components/DonationCard';
 import { DonationForm } from '@/app/components/DonationForm';
+import { StatsSection } from '@/app/components/StatsSection';
+import { AboutSection } from '@/app/components/AboutSection';
 
 function BloodDrop({ className }: { className?: string }) {
   return (
@@ -14,7 +16,7 @@ function BloodDrop({ className }: { className?: string }) {
 
 function Divider() {
   return (
-    <div className="flex items-center gap-4 my-14">
+    <div className="flex items-center gap-4 my-2">
       <div className="flex-1 h-px bg-warm-border" />
       <BloodDrop className="w-3.5 h-3.5 text-crimson opacity-50" />
       <div className="flex-1 h-px bg-warm-border" />
@@ -41,37 +43,42 @@ export default async function Home() {
             Blood Donation Registry
           </span>
         </div>
-        <span className="text-warm-muted text-sm">
-          {donations.length} donation{donations.length !== 1 ? 's' : ''} recorded
-        </span>
       </header>
 
-      {/* Hero */}
-      <section className="max-w-2xl mx-auto px-6 pt-6 pb-14 text-center">
-        <h1
-          className="text-warm-ink mb-6 leading-none"
-          style={{
-            fontFamily: 'var(--font-cormorant)',
-            fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-            fontWeight: 600,
-            lineHeight: 1.05,
-          }}
-        >
-        </h1>
-        <p
-          className="text-warm-muted leading-relaxed"
-          style={{ fontFamily: 'var(--font-lora)', fontSize: '1rem' }}
-        >
-          A record of everyone who has donated blood.
-          Each donation is a gift of life.
-        </p>
-      </section>
-
       <div className="max-w-5xl mx-auto px-6">
+        {/* (i) Stats */}
+        <StatsSection donations={donations} />
+
         <Divider />
 
-        {/* Donations feed */}
-        <section className="mb-4">
+        {/* (ii) About */}
+        <AboutSection />
+
+        <Divider />
+
+        {/* (iii) Donation form */}
+        <section className="max-w-md mx-auto py-14">
+          <h2
+            className="text-warm-ink text-center mb-2"
+            style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
+          >
+            Record your donation
+          </h2>
+          <p
+            className="text-center text-warm-muted text-sm mb-8"
+            style={{ fontFamily: 'var(--font-lora)' }}
+          >
+            Donated blood? Add your name to the list.
+          </p>
+          <div className="bg-white rounded-2xl shadow-sm border border-warm-border p-7">
+            <DonationForm />
+          </div>
+        </section>
+
+        <Divider />
+
+        {/* (iv) Full donation list */}
+        <section className="py-14">
           <h2
             className="text-warm-ink text-center mb-2"
             style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
@@ -93,33 +100,12 @@ export default async function Home() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
               {donations.map((donation, i) => (
                 <DonationCard key={donation.id} donation={donation} index={i} />
               ))}
             </div>
           )}
-        </section>
-
-        <Divider />
-
-        {/* Registration form */}
-        <section className="max-w-md mx-auto mb-20">
-          <h2
-            className="text-warm-ink text-center mb-2"
-            style={{ fontFamily: 'var(--font-cormorant)', fontSize: '2rem', fontWeight: 600 }}
-          >
-            Record your donation
-          </h2>
-          <p
-            className="text-center text-warm-muted text-sm mb-8"
-            style={{ fontFamily: 'var(--font-lora)' }}
-          >
-            Donated blood? Add your name to the list.
-          </p>
-          <div className="bg-white rounded-2xl shadow-sm border border-warm-border p-7">
-            <DonationForm />
-          </div>
         </section>
       </div>
 

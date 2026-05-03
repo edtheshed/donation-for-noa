@@ -35,9 +35,12 @@ donations (
 )
 ```
 
+## Package manager
+Use **bun** for all package operations (`bun add`, `bun dev`, `bunx tsc`, etc.). Do not use npm or npx.
+
 ## Local dev
 1. Copy `.env.local.example` → `.env.local` and fill in `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
-2. `npm run dev`
+2. `bun dev`
 
 `supabase/schema.sql` is for reference — the DB is already provisioned.
 
