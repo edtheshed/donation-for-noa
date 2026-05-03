@@ -1,14 +1,6 @@
 import Image from 'next/image';
 import type { Donation } from '@/types/donation';
 
-function BloodDrop({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z" />
-    </svg>
-  );
-}
-
 function CalendarIcon() {
   return (
     <svg className="w-3.5 h-3.5 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -59,15 +51,12 @@ export function DonationCard({ donation, index }: Props) {
       )}
 
       <div className="p-5 flex flex-col gap-3 flex-1">
-        <div className="flex items-start justify-between gap-2">
-          <h3
-            className="text-warm-ink leading-tight"
-            style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.45rem', fontWeight: 600 }}
-          >
-            {donation.name}
-          </h3>
-          <BloodDrop className="w-4 h-4 text-crimson flex-shrink-0 mt-1" />
-        </div>
+        <h3
+          className="text-warm-ink leading-tight"
+          style={{ fontFamily: 'var(--font-cormorant)', fontSize: '1.45rem', fontWeight: 600 }}
+        >
+          {donation.name}
+        </h3>
 
         <div className="flex flex-col gap-1.5 text-sm text-warm-muted">
           <div className="flex items-center gap-2">

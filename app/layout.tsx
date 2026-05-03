@@ -20,7 +20,7 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: 'Blood Donation Registry',
+  title: 'Donations for Noa',
   description: 'Register your blood donation.',
 };
 

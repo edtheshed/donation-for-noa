@@ -6,22 +6,8 @@ import { DonationForm } from '@/app/components/DonationForm';
 import { StatsSection } from '@/app/components/StatsSection';
 import { AboutSection } from '@/app/components/AboutSection';
 
-function BloodDrop({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M12 2.5C9.5 7 5.5 11.5 5.5 15.5a6.5 6.5 0 0013 0c0-4-4-8.5-6.5-13z" />
-    </svg>
-  );
-}
-
 function Divider() {
-  return (
-    <div className="flex items-center gap-4 my-2">
-      <div className="flex-1 h-px bg-warm-border" />
-      <BloodDrop className="w-3.5 h-3.5 text-crimson opacity-50" />
-      <div className="flex-1 h-px bg-warm-border" />
-    </div>
-  );
+  return <div className="h-px bg-warm-border my-2" />;
 }
 
 export default async function Home() {
@@ -33,16 +19,13 @@ export default async function Home() {
       <div className="h-1 bg-crimson w-full" />
 
       {/* Header */}
-      <header className="max-w-5xl mx-auto px-6 py-7 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <BloodDrop className="w-6 h-6 text-crimson" />
-          <span
-            className="text-warm-ink tracking-widest text-xs uppercase font-medium"
-            style={{ fontFamily: 'var(--font-cormorant)', fontSize: '0.9rem', letterSpacing: '0.16em' }}
-          >
-            Blood Donation Registry
-          </span>
-        </div>
+      <header className="max-w-5xl mx-auto px-6 py-7">
+        <span
+          className="text-warm-ink tracking-widest text-xs uppercase font-medium"
+          style={{ fontFamily: 'var(--font-cormorant)', fontSize: '0.9rem', letterSpacing: '0.16em' }}
+        >
+          Donations for Noa
+        </span>
       </header>
 
       <div className="max-w-5xl mx-auto px-6">
@@ -94,7 +77,6 @@ export default async function Home() {
 
           {donations.length === 0 ? (
             <div className="text-center py-16 text-warm-muted">
-              <BloodDrop className="w-10 h-10 mx-auto mb-4 opacity-20" />
               <p style={{ fontFamily: 'var(--font-lora)' }}>
                 No donations recorded yet. Be the first.
               </p>
@@ -111,9 +93,8 @@ export default async function Home() {
 
       {/* Footer */}
       <footer className="border-t border-warm-border py-7">
-        <div className="max-w-5xl mx-auto px-6 flex items-center justify-center gap-2 text-warm-muted text-sm">
-          <BloodDrop className="w-3.5 h-3.5 text-crimson opacity-50" />
-          <span style={{ fontFamily: 'var(--font-lora)' }}>Blood Donation Registry</span>
+        <div className="max-w-5xl mx-auto px-6 flex items-center justify-center text-warm-muted text-sm">
+          <span style={{ fontFamily: 'var(--font-lora)' }}>Donations for Noa</span>
         </div>
       </footer>
     </div>
