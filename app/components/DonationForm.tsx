@@ -67,7 +67,7 @@ export function DonationForm() {
     if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     setSubmitting(true);
     setResult(null);
@@ -87,7 +87,7 @@ export function DonationForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+    <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" suppressHydrationWarning>
       {/* Name */}
       <div>
         <label htmlFor="name" className={labelClass}>
@@ -100,6 +100,7 @@ export function DonationForm() {
           required
           placeholder="e.g. Sarah Mitchell"
           className={inputClass}
+          suppressHydrationWarning
         />
       </div>
 
@@ -113,9 +114,9 @@ export function DonationForm() {
           name="donated_at"
           type="date"
           required
-          defaultValue={today}
           max={today}
           className={inputClass}
+          suppressHydrationWarning
         />
       </div>
 
@@ -131,10 +132,8 @@ export function DonationForm() {
           required
           placeholder="e.g. King's College Hospital, London"
           className={inputClass}
+          suppressHydrationWarning
         />
-        <p className="mt-1.5 text-xs text-warm-muted">
-          Location search coming soon — enter the name or address for now.
-        </p>
       </div>
 
       {/* Message */}
@@ -149,6 +148,7 @@ export function DonationForm() {
           rows={3}
           placeholder="Share why you donated, or anything you'd like to say..."
           className={`${inputClass} resize-none leading-relaxed`}
+          suppressHydrationWarning
         />
       </div>
 
